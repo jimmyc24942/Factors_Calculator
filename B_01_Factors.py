@@ -48,20 +48,21 @@ def factor(var_to_factor):
     factors_list = []
 
     # square root the number to work out when to stop working
-    stop = var_to_factor = factors_list ** 0.5
+    stop = var_to_factor ** 0.5
     stop = int(stop)
 
-    for item in range (1, 201):
+    for item in range (1, stop + 1):
 
         # check to see if the item is a factor
-        if to_factor == 0:
+        if to_factor % item == 0:
+            factors_list.append(item)
 
 
-           # Calculate partner
-           partner = to_factor
+            # Calculate partner
+            partner = to_factor // item
 
-           # Add partner to the list (but prevent duplicate entries)
-           if partner not in factors_list:
+            # Add partner to the list (but prevent duplicate entries)
+            if partner not in factors_list:
                factors_list.append(partner)
 
 
@@ -85,17 +86,17 @@ while True:
 
     # ask user for number to be factorised
     to_factor = num_check("\nEnter an integer (or xxx to quit): ")
-     print("You chose to factor", to_factor)
+    print("You chose to factor", to_factor)
 
-     if to_factor == "xxx":
+    if to_factor == "xxx":
          break
 
-     # get factors for integers that are 2 or more
-     elif to_factor != 1:
-         all_factors = factor(to_factor)
+    # get factors for integers that are 2 or more
+    elif to_factor != 1:
+        all_factors = factor(to_factor)
 
-     # set up comment for unity
-     else:
+    # set up comment for unity
+    else:
          all_factors = ""
          comment = "One is UNITY! It only has one factor. Itself :)"
 
@@ -110,8 +111,10 @@ while True:
         comment = f"{to_factor} is a perfect square"
 
     # Set up headings
-    if to_factor > 1:
+    if to_factor == 1:
         heading = "One is special..."
+    else:
+        heading = f"Factors of {to_factor}"
 
     # output factors and comment
     print()
@@ -119,4 +122,4 @@ while True:
     print(all_factors)
     print(comment)
 
-    print("Thank you for using the factors calcultor")
+    print("Thank you for using the factors calculator")
